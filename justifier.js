@@ -7,7 +7,7 @@ const signingKey = secureRandom(256, {type: 'Buffer'})
 let currentJwt
 let words = []
 
-export const authenticator = async (req, res, next) => {
+const authenticator = async (req, res, next) => {
     const token = req.headers.authorization?.replace('Bearer ', '')
     await nJwt.verify(token, signingKey, (err, verifiedJwt) => {
         if (err) {
@@ -26,7 +26,7 @@ export const authenticator = async (req, res, next) => {
     })
 }
 
-export const logIn = email => {
+const logIn = email => {
     const claims = {
         iss: `https://tictactrip.com`,
         sub: `${email}`,
@@ -36,7 +36,7 @@ export const logIn = email => {
     return {status: 200, token: jwt}
 }
 
-export const justify = text => {
+const justify = text => {
     let counter = 0
     let lastSpace = 0
     for (let i = 0; i < text.length; i++) {
@@ -69,9 +69,11 @@ const wordCounter = () => {
     })?.words >= 300 ? 1 : 0
 }
 
-export const justifyLimiter = rateLimit({
+const justifyLimiter = rateLimit({
     windowMs: 24 * 60 * 60 * 1000,
     max: wordCounter,
     message: 'Daily word limit reached',
     statusCode: 402
 })
+
+module.exports = {authenticator, logIn, justify, justifyLimiter}

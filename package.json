@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js",
+    "start": "node index.js",
     "test": "jest --watchAll"
   },
   "keywords": [],
@@ -38,6 +38,6 @@
     ]
   },
   "engines": {
-    "node": "12.18.4"
+    "node": "14.15.4"
   }
 }

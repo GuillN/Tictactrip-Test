@@ -1,9 +1,8 @@
-import 'regenerator-runtime/runtime'
-import app from './app'
+// import 'regenerator-runtime/runtime'
+const app = require('./app')
 
-const port = 8081
+const port = process.env.PORT || 8081
 
-const server = app.listen(port, () => {
-    const port = server.address().port
+app.listen(port, () => {
     console.log('Server listening on port ' + port + '...')
 })
